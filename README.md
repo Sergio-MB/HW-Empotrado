@@ -3,5 +3,5 @@ Sistema de control de un ascensor basado en microcontroladores (PIC10F200 y LPC2
 
 ## Contenido
 
-- [Documentación](/Documentacion.pdf) - Documentación del sistema (Diseño e implementación)
+- [Documentación](/Documentación.pdf) - Documentación del sistema (Diseño e implementación)
 - [ProyectoProteus](/HW/lpc2103simple/ProyectoProteus.pdsprj) -  Proyecto Proteus
