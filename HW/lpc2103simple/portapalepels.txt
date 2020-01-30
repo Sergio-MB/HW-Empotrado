@@ -1,0 +1,140 @@
+
+     
+      MOVLW  0x31   ;a
+      CALL TXBYTE  
+      MOVLW  0x62	;b
+      CALL TXBYTE  
+      
+       MOVLW  0x20	;un espacio
+       CALL TXBYTE
+      
+      
+      
+      MOVLW  0x30
+     BTFSC GPIO,1			;Skip next Instr. If Mem[f].b==0
+       MOVLW  0x31
+        MOVWF LEDVERDE
+        MOVF LEDVERDE, W
+        CALL TXBYTE 
+      
+        MOVLW  0x30
+        BTFSC GPIO,2			;Skip next Instr. If Mem[f].b==0
+        MOVLW  0x31
+        MOVWF LEDROJO
+        MOVF LEDROJO, W
+        CALL TXBYTE 
+      
+         MOVLW  0x31
+        BTFSC GPIO,3			;Skip next Instr. If Mem[f].b==0
+        MOVLW  0x30
+        MOVWF BOTON
+        MOVF BOTON, W
+        CALL TXBYTE 
+		
+		
+		
+		
+		
+		
+		
+TXBYTE: 
+      MOVWF DATO
+   
+      MOVLW  8
+      MOVWF CNTBIT
+ 
+      BCF GPIO,0
+      
+      MOVLW 7
+      MOVWF CNT
+           
+loop_retardo:	DECFSZ CNT , F
+			GOTO loop_retardo
+txbit:	  
+ 
+     MOVF DATO,W
+     MOVWF GPIO
+     RRF DATO,F
+     
+     MOVLW 6
+     MOVWF CNT
+loop_retardo2: DECFSZ CNT, F
+			GOTO loop_retardo2
+     nop
+     DECFSZ CNTBIT ,F
+     GOTO txbit
+     
+     BSF GPIO,0
+     MOVLW 6
+     MOVWF CNT
+loop_retardo3: DECFSZ CNT, F
+			GOTO loop_retardo3    
+     ;CLRF DATO
+     RETLW 0		
+		
+		
+		
+		
+		
+		
+		
+		
+		--------------
+		
+		
+		
+		RXBYTE: 
+      BTFSS GPIO,0
+      GOTO RXXBYTE
+      MOVLW  8
+      MOVWF CNTBIT
+ 
+      BSF GPIO,0
+      
+      MOVLW 7
+      MOVWF CNT
+      loopr_retardo:	DECFSZ CNT , F
+			GOTO loopr_retardo
+      BTFSS GPIO,0
+      GOTO RXXBYTE
+rxbit:	  
+      MOVLW 6
+      MOVWF CNT
+   ;   BTFSC GPIO,0
+     
+     ;MOVF PREGUNTA,W				   MOVF DATO,W
+									      ;MOVWF GPIO
+									      ;RRF DATO, F
+     ;MOVWF GPIO
+     MOVF GPIO,W
+     ;MOVWF PREGUNTA
+     RLF GPIO,F
+     
+     MOVLW 6
+     MOVWF CNT
+loopr_retardo2: DECFSZ CNT, F
+			GOTO loopr_retardo2
+     nop
+     DECFSZ CNTBIT ,F
+     GOTO rxbit
+     
+     BCF GPIO,0
+     MOVLW 32
+     MOVWF CNT
+loopr_retardo3: DECFSZ CNT, F
+			GOTO loopr_retardo3    
+     RETLW 0
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

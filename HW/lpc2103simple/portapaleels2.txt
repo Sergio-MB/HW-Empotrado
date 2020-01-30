@@ -1,0 +1,97 @@
+portapepales 2
+
+
+
+  MOVF PREGUNTA2, W
+   BCF STATUS, 2
+   XORLW 0x01
+   BTFSS STATUS, 2	;Compruebo si son iguales fijandome en el flag Z
+   GOTO	TX1
+   
+   
+   MOVF PREGUNTA2, W
+   BCF STATUS, 2
+   XORLW 0x02
+   BTFSS STATUS, 2	;Compruebo si son iguales fijandome en el flag Z
+   GOTO	TX2
+   
+  
+   MOVF PREGUNTA2, W
+   BCF STATUS, 2
+   XORLW 0x03
+   BTFSS STATUS, 2	;Compruebo si son iguales fijandome en el flag Z
+   GOTO	TX3
+   
+   
+   MOVF PREGUNTA2, W
+   BCF STATUS, 2
+   XORLW 0x04
+   BTFSS STATUS, 2	;Compruebo si son iguales fijandome en el flag Z
+   GOTO	TX4
+   
+
+   MOVF PREGUNTA2, W
+   BCF STATUS, 2
+   XORLW 0x05
+   BTFSS STATUS, 2	;Compruebo si son iguales fijandome en el flag Z
+   GOTO	TX5
+   
+
+   MOVF PREGUNTA2, W
+   BCF STATUS, 2
+   XORLW 0x06
+   BTFSS STATUS, 2	;Compruebo si son iguales fijandome en el flag Z
+   GOTO	TX6
+   
+
+   MOVF PREGUNTA2, W
+   BCF STATUS, 2
+   XORLW 0x07
+   BTFSS STATUS, 2	;Compruebo si son iguales fijandome en el flag Z
+   GOTO	TX7
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+         MOVLW 0xFFFFFFFF
+      MOVWF CNT
+           
+loopPP_retardo:	DECFSZ CNT , F
+			GOTO loopPP_retardo
+      MOVLW 0xFFFFFFFF
+      MOVWF CNT
+           
+loopP2P_retardo:	DECFSZ CNT , F
+			GOTO loopP2P_retardo
+			
+      MOVLW 0xFFFFFFFF
+      MOVWF CNT
+           
+loopP3P_retardo:	DECFSZ CNT , F
+			GOTO loopP3P_retardo
+			
+     
